@@ -20,7 +20,7 @@ class PhonForm extends Component {
 
     render() {
         return (
-            <form>
+            <form onSubmit={this.handleSubmit}>
                 <input name="name" 
                        placeholder="이름" 
                        onChange={this.handleChange} 

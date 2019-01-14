@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import PhonForm from './PhonForm';
+import PhoneInfoList from './PhoneInfoList';
 
 class App extends Component {
 
@@ -19,14 +20,39 @@ class App extends Component {
     });
   }
 
+  handleRemove = (id) => {
+    const {information} = this.state;
+    this.setState({
+      information: information.filter(info => info.id !== id)
+    });
+  }
+
+  handleUpdate = (id) => {
+    const {information} = this.state;
+    this.setState(
+      {
+        information : information.map(
+          info => {
+            if(info.id === id)
+            {
+              return {
+                id, ...data,  
+              };
+            }
+            return info;
+          }
+        )
+      });
+  }
+
   render() {
     return (
       <div className="App">
         <PhonForm onCreate={this.handleCreate}/>
-        {JSON.stringify(this.state.information)}
+        <PhoneInfoList data={this.state.information} onRemove={this.handleRemove} />
       </div>
     );
-  }
+  } 
 }
 
 export default App;
